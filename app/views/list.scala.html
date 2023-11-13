@@ -1,0 +1,16 @@
+<!-- app/views/list.scala.html -->
+@(ads: Seq[String])
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ads List</title>
+  </head>
+  <body>
+    <h1>Ads List</h1>
+    <ul>
+      @for(ad <- ads) {
+        <li>@ad.title</li>
+      }
+    </ul>
+  </body>
+</html>
