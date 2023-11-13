@@ -1,0 +1,8 @@
+logs
+target
+/.bsp
+/.classpath
+/.project
+/.gradle
+/.settings
+/RUNNING_PID
