@@ -5,4 +5,7 @@ target
 /.project
 /.gradle
 /.settings
+/.bloop
+/.metals
+/.vscode
 /RUNNING_PID
