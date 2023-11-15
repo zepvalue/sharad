@@ -5,11 +5,12 @@ import play.api._
 import play.api.mvc._
 
 import daos.AdDAO
-import models.Ad
-import play.api.libs.json.Json
+import models.{ Ad, AdJsonSerialization }
+import play.api.libs.json._
 
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
+
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -29,9 +30,10 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents, a
     Ok(views.html.index())
   }
 
-  def test() = Action.async { implicit request: Request[AnyContent] => 
-      adDAO.list().map { 
-        ads => Ok(views.html.list(ads))    
-    } 
+  def test() = Action.async { implicit request: Request[AnyContent] =>
+     adDAO.list().map { ads =>
+      implicit val adWrites: Writes[Ad] = AdJsonSerialization.adWrites //If I want to use sep
+      Ok(Json.toJson(ads))
+    }
   }
 }
