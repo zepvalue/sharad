@@ -16,7 +16,7 @@ import scala.concurrent.ExecutionContext
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(val controllerComponents: ControllerComponents)(implicit ec: ExecutionContext) extends BaseController {
+class HomeController @Inject()(val controllerComponents: ControllerComponents, adDAO: AdDAO)(implicit ec: ExecutionContext) extends BaseController {
 
   /**
    * Create an Action to render an HTML page.
@@ -29,14 +29,9 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
     Ok(views.html.index())
   }
 
-  def test() = Action { implicit request: Request[AnyContent] => 
-      // adDAO.list().map { ads =>
-      //   Ok(views.html.list(ads))
-
-        val ads: Seq[String] = Seq("Item 1", "Item 2", "Item 3")
-        val htmlContent = views.html.list(ads)
-        Ok(htmlContent)
-    
+  def test() = Action.async { implicit request: Request[AnyContent] => 
+      adDAO.list().map { 
+        ads => Ok(views.html.list(ads))    
+    } 
   }
- 
 }
