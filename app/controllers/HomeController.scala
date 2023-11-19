@@ -32,7 +32,6 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents, a
 
   def test() = Action.async { implicit request: Request[AnyContent] =>
      adDAO.list().map { ads =>
-      implicit val adWrites: Writes[Ad] = AdJsonSerialization.adWrites //If I want to use sep
       Ok(Json.toJson(ads))
     }
   }
