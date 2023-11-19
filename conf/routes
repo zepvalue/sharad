@@ -10,6 +10,7 @@
 
 GET / controllers.HomeController.index()
 GET /ads controllers.HomeController.test()
+POST /ads controllers.HomeController.createAd()
 
 # Map static resources from the /public folder to the /assets URL path
 
