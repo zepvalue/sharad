@@ -36,18 +36,34 @@ class HomeController @Inject() (
   }
 
   def createAd: Action[JsValue] = Action.async(parse.json) { implicit request =>
-      request.body.validate[Ad].fold(
-      // Invalid JSON format
-      _ => {
-        Future.successful(BadRequest("Invalid JSON"))
-      },
-      ad => {
-        adDAO.insert(ad.title).map { createdAd =>
-          Created(Json.toJson(createdAd))
-        }.recover {
-          case _ => InternalServerError("Error while creating ad")
+    request.body
+      .validate[Ad]
+      .fold(
+        // Invalid JSON format
+        _ => {
+          Future.successful(BadRequest("Invalid JSON"))
+        },
+        ad => {
+          adDAO
+            .insert(ad.title)
+            .map { createdAd =>
+              Created(Json.toJson(createdAd))
+            }
+            .recover { case _ =>
+              InternalServerError("Error while creating ad")
+            }
         }
-      }
-    )
+      )
+  }
+
+  def deleteAd(id: Int): Action[AnyContent] = Action.async {
+    implicit request =>
+      adDAO
+        .delete(id)
+        .map {
+          case 0 => NotFound
+          case _ => Ok
+        }
+
   }
 }

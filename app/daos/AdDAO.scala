@@ -18,4 +18,8 @@ class AdDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)(
     db.run(insertQuery).map(generatedId => Ad(Some(generatedId), title))
   }
   def list(): Future[Seq[Ad]] = db.run(ads.result)
+  def delete(id: Int): Future[Int] = {
+    val deleteQuery = ads.filter(_.id === id).delete
+    db.run(deleteQuery)
+  }
 }

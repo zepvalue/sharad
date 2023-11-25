@@ -11,6 +11,7 @@
 GET / controllers.HomeController.index()
 GET /ads controllers.HomeController.test()
 POST /ads controllers.HomeController.createAd()
+DELETE /ads/:id controllers.HomeController.deleteAd(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 

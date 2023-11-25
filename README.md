@@ -8,5 +8,5 @@ TODO
 
 - [ ] Use a json serializer
 - [ ] Remove the views as this api will just serve json 
-- [ ] CUD operations
+- [ ] U operations
 - [ ] port the db to use postgreSQL
