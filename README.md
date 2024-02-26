@@ -1,15 +1,9 @@
 ### sharad
 
-Slick as ORM
-Evolutions to manage migrations
-Play as main framework
+- Slick as ORM
+- Evolutions to manage migrations
+- Play as main framework
 
-Choices : 
-
-play-slick ORM+
-play-slick-evolutions database schema evolutions
-org.slf4j logging
-sqlite-jdbc for simplicity since I am using a local db
 
 TODO
 
