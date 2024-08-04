@@ -1,3 +1,5 @@
+Tool to help activists to afford billboard advertising 
+
 ### sharad
 
 - Slick as ORM
